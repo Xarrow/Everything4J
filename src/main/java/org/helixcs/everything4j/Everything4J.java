@@ -16,6 +16,7 @@ import java.util.Map;
 public class Everything4J {
     private static  EverythingNative everythingInstance;
     static {
+//        System.set
         if (EverythingUtils.JDK64BIT==EverythingUtils.currentJDKBit()){
             everythingInstance = EverythingUtils.makeDllInstance("Everything64.dll",EverythingNative.class);
         }else if(EverythingUtils.JDK32BIT==EverythingUtils.currentJDKBit()){

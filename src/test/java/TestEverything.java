@@ -5,8 +5,9 @@ import java.util.Map;
 
 public class TestEverything {
     @Test
-    public void testSearch(){
-        Map<String,?> result = Everything4J.showSearchResult("abc");
+    public void testSearch() {
+        Map<String, ?> result = Everything4J.showSearchResult("abc");
         System.out.println(result);
+        System.out.println(result.size());
     }
 }

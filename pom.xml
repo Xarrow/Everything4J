@@ -6,7 +6,7 @@
 
     <groupId>org.helixcs.everything4j</groupId>
     <artifactId>everything4j</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0</version>
 
     <description>everything4j</description>
     <build>
@@ -14,6 +14,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.7.0</version>
                 <configuration>
                     <source>8</source>
                     <target>8</target>
