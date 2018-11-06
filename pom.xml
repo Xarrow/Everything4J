@@ -10,6 +10,7 @@
 
     <description>everything4j</description>
     <build>
+        <finalName>everything4j</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
