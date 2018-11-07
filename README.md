@@ -26,7 +26,7 @@ Official document reference at [https://www.voidtools.com/support/everything/sdk
 ----
 # Usage
 
-1. Search full file path according to search key string.
+1. search full file path according to search key string.
 
 ```java
 
