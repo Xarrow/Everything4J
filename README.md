@@ -7,6 +7,7 @@ Everything4J is a implementation of everything which is base on `Everything.dll`
 `Everything` is dependency on Windows file system , so Everything4J also support on Windows system .
 
 Official document reference at [https://www.voidtools.com/support/everything/sdk/](https://www.voidtools.com/support/everything/sdk/).
+
 ----
 # Dependencies
 
