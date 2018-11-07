@@ -3,7 +3,9 @@
 ----
 
 Everything4J is a implementation of everything which is base on `Everything.dll`, and powered by [JNA ( Java Native Access )](https://github.com/java-native-access/jna).
+
 `Everything` is dependency on Windows file system , so Everything4J also support on Windows system .
+
 Official document reference at [https://www.voidtools.com/support/everything/sdk/](https://www.voidtools.com/support/everything/sdk/).
 ----
 # Dependencies
