@@ -14,19 +14,23 @@ Official document reference at [https://www.voidtools.com/support/everything/sdk
 1. JNA
 
 ```xml
-    <dependencies>
         <dependency>
             <groupId>net.java.dev.jna</groupId>
             <artifactId>jna</artifactId>
             <version>${jna.version}</version>
         </dependency>
+
+```
+
+2. junit
+
+```xml
         <dependency>
              <groupId>junit</groupId>
              <artifactId>junit</artifactId>
              <version>${junit.version}</version>
              <scope>test</scope>
         </dependency>
-    </dependencies>
 
 ```
 
@@ -42,7 +46,9 @@ mvn clean install -Dmaven.test.skip=true
 
 2. import target jar into project.
 
-3. search full file path according to search key string.
+3. put dynamic link library (Everything32.dll , Everything64.dll) into the root of your project.
+
+4. search full file path according to search key string.
 
 ```java
 
