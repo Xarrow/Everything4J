@@ -41,7 +41,6 @@ Official document reference at [https://www.voidtools.com/support/everything/sdk
 
 ```
 mvn clean install -Dmaven.test.skip=true
-
 ```
 
 2. import target jar into project.
@@ -51,6 +50,8 @@ mvn clean install -Dmaven.test.skip=true
 4. search full file path according to search key string.
 
 ```java
+
+private static Everything4j everything4jInstance = Everything4j.getInstance();
 
 List<String> sl = everything4jInstance.searchResult("abc");
 System.out.println(sl.size());
