@@ -18,15 +18,31 @@ Official document reference at [https://www.voidtools.com/support/everything/sdk
         <dependency>
             <groupId>net.java.dev.jna</groupId>
             <artifactId>jna</artifactId>
-            <version>4.5.1</version>
+            <version>${jna.version}</version>
+        </dependency>
+        <dependency>
+             <groupId>junit</groupId>
+             <artifactId>junit</artifactId>
+             <version>${junit.version}</version>
+             <scope>test</scope>
         </dependency>
     </dependencies>
+
 ```
 
 ----
 # Usage
 
-1. search full file path according to search key string.
+1. compile as jar
+
+```
+mvn clean install -Dmaven.test.skip=true
+
+```
+
+2. import target jar into project.
+
+3. search full file path according to search key string.
 
 ```java
 
