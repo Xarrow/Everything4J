@@ -14,15 +14,15 @@ public class TestEverything {
             System.out.println(i + " ==> " + sl.get(i));
         }
         // force test
-        while (true) {
-            new Thread(() -> {
-                System.out.println(sl.size());
-                for (int i = 0; i < sl.size(); i++) {
-                    System.out.println(i + " ==> " + sl.get(i));
-                }
-                System.gc();
-            }).start();
-        }
+//        while (true) {
+//            new Thread(() -> {
+//                System.out.println(sl.size());
+//                for (int i = 0; i < sl.size(); i++) {
+//                    System.out.println(i + " ==> " + sl.get(i));
+//                }
+//                System.gc();
+//            }).start();
+//        }
     }
 
     @Test
