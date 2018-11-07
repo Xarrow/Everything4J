@@ -2,7 +2,9 @@
 
 ----
 
-Everything4J is a implementation of everything which is base on `Everything.dll` . And Everything is only support Windows system.
+Everything4J is a implementation of everything which is base on `Everything.dll`, and powered by [JNA ( Java Native Access )](https://github.com/java-native-access/jna).
+
+`Everything` is  base on Windows file system , so Everything4J also support on Windows system .
 
 ----
 # Dependencies
@@ -22,7 +24,18 @@ Everything4J is a implementation of everything which is base on `Everything.dll`
 ----
 # Usage
 
-Come Soon .......
+1. Search full file path according to search key string.
+
+```java
+
+List<String> sl = everything4jInstance.searchResult("abc");
+System.out.println(sl.size());
+for (int i = 0; i < sl.size(); i++) {
+    System.out.println(i + " ==> " + sl.get(i));
+    }
+}
+```
+
 ----
 # License
 

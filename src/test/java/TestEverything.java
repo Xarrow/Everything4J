@@ -8,9 +8,14 @@ public class TestEverything {
 
     @Test
     public void testSearchE() {
+        List<String> sl = everything4jInstance.searchResult("google");
+        System.out.println(sl.size());
+        for (int i = 0; i < sl.size(); i++) {
+            System.out.println(i + " ==> " + sl.get(i));
+        }
+        // force test
         while (true) {
             new Thread(() -> {
-                List<String> sl = everything4jInstance.searchResult("google");
                 System.out.println(sl.size());
                 for (int i = 0; i < sl.size(); i++) {
                     System.out.println(i + " ==> " + sl.get(i));
