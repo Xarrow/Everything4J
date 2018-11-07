@@ -4,19 +4,25 @@ import org.junit.Test;
 import java.util.List;
 
 public class TestEverything {
+    private static Everything4j everything4jInstance = Everything4j.getInstance();
 
     @Test
     public void testSearchE() {
-        List<String> sl = Everything4j.searchResult("abc .py");
-        System.out.println(sl.size());
-        for (int i = 0; i < sl.size(); i++) {
-            System.out.println(i + " ==> " + sl.get(i));
+        while (true) {
+            new Thread(() -> {
+                List<String> sl = everything4jInstance.searchResult("google");
+                System.out.println(sl.size());
+                for (int i = 0; i < sl.size(); i++) {
+                    System.out.println(i + " ==> " + sl.get(i));
+                }
+                System.gc();
+            }).start();
         }
     }
 
     @Test
     public void testSearchFileNames() {
-        List<String> sl = Everything4j.searchNameList("abc .py");
+        List<String> sl = everything4jInstance.searchNameList("abc .py");
         System.out.println(sl.size());
         for (String s : sl) {
             System.out.println(s);
@@ -25,7 +31,7 @@ public class TestEverything {
 
     @Test
     public void testPathList() {
-        List<String> sl = Everything4j.searchPathList("abc .py");
+        List<String> sl = everything4jInstance.searchPathList("abc .py");
         System.out.println(sl.size());
         for (String s : sl) {
             System.out.println(s);

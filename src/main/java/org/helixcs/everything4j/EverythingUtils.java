@@ -14,6 +14,16 @@ public class EverythingUtils {
     public static final Integer JDK32BIT = 32;
 
     /**
+     * check Arch whether is Windows
+     *
+     * @return true / false
+     */
+    public static boolean isWinArch() {
+        String osArch = System.getProperty("os.name").toLowerCase();
+        return osArch.length() >= 1 && osArch.contains("windows");
+    }
+
+    /**
      * Return current JDK Bit
      *
      * @return 32/64

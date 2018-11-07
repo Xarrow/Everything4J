@@ -507,7 +507,7 @@ public interface EverythingNative extends StdCallLibrary {
      * Original signature : <code>DWORD Everything_GetResultFullPathNameW(DWORD, LPWSTR, DWORD)</code><br>
      * <i>native declaration : include\Everything.h:128</i>
      */
-    int Everything_GetResultFullPathNameW(int dwIndex, EverythingNative.LPWSTR wbuf, int wbuf_size_in_wchars);
+    int Everything_GetResultFullPathNameW(int dwIndex, Buffer wbuf, int wbuf_size_in_wchars);
 
     int Everything_GetResultFullPathNameW(int dwIndex, Pointer wbuf, int wbuf_size_in_wchars);
 

@@ -1,11 +1,8 @@
 package org.helixcs.everything4j;
 
-import com.sun.jna.Memory;
-import com.sun.jna.Pointer;
 import com.sun.jna.WString;
 
 import java.nio.Buffer;
-import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,66 +12,110 @@ import java.util.List;
  * Email : <p>zhangjian12424#gmail.com</p>
  */
 public final class Everything4j {
-    private static EverythingNative everythingInstance;
+
+    private static EverythingNative everythingNative;
+
+    private static final int BUFFER_LEN = 260;
 
     static {
         if (EverythingUtils.JDK64BIT == EverythingUtils.currentJDKBit()) {
-            everythingInstance = EverythingUtils.makeDllInstance("Everything64.dll", EverythingNative.class);
+            everythingNative = EverythingUtils.makeDllInstance("Everything64.dll", EverythingNative.class);
         } else if (EverythingUtils.JDK32BIT == EverythingUtils.currentJDKBit()) {
-            everythingInstance = EverythingUtils.makeDllInstance("Everything32.dll", EverythingNative.class);
+            everythingNative = EverythingUtils.makeDllInstance("Everything32.dll", EverythingNative.class);
         }
     }
 
+    private Everything4j() {
+    }
 
-    public static List<String> searchPathList(String searchKey) {
+    public static Everything4j getInstance() {
+        if (!EverythingUtils.isWinArch()) {
+            try {
+                throw new EverythingException("OS Arch Only Windows Supported!");
+            } catch (EverythingException e) {
+                e.printStackTrace();
+            }
+        }
+        return InnerHolder.everything4jInstance;
+    }
+
+    private static class InnerHolder {
+        private static Everything4j everything4jInstance = new Everything4j();
+    }
+
+    public List<String> searchPathList(String searchKey) {
         List<String> searchPathList = new ArrayList<>();
-        everythingInstance.Everything_SetSearchW(new WString(searchKey));
-        everythingInstance.Everything_QueryW(true);
-        int resultNum = everythingInstance.Everything_GetNumResults();
+        everythingNative.Everything_SetSearchW(new WString(searchKey));
+        everythingNative.Everything_QueryW(true);
+        int resultNum = everythingNative.Everything_GetNumResults();
         for (int i = 0; i < resultNum; i++) {
-            searchPathList.add(everythingInstance.Everything_GetResultPathA(i).toString());
+            searchPathList.add(everythingNative.Everything_GetResultPathA(i).toString());
         }
         return searchPathList;
     }
 
-    public static List<String> searchNameList(String searchKey) {
+    public List<String> searchNameList(String searchKey) {
         List<String> searchNameList = new ArrayList<>();
-        everythingInstance.Everything_SetSearchW(new WString(searchKey));
-        everythingInstance.Everything_QueryW(true);
-        int fileNum = everythingInstance.Everything_GetNumResults();
+        everythingNative.Everything_SetSearchW(new WString(searchKey));
+        everythingNative.Everything_QueryW(true);
+        int fileNum = everythingNative.Everything_GetNumResults();
         for (int i = 0; i < fileNum; i++) {
-            String fileName = everythingInstance.Everything_GetResultFileNameW(i).toString();
+            String fileName = everythingNative.Everything_GetResultFileNameW(i).toString();
             System.out.println(fileName);
             searchNameList.add(fileName);
         }
         return searchNameList;
     }
 
-    public static List<String> searchResult(String searchKey) {
+    public synchronized List<String> searchResult(String searchKey) {
         List<String> searchResult = new ArrayList<>();
-        everythingInstance.Everything_SetSearchW(new WString(searchKey));
-        everythingInstance.Everything_QueryW(true);
-//        Buffer p = ByteBuffer.allocate(260);
-        Pointer p = new Memory(260);
+        everythingNative.Everything_SetSearchW(new WString(searchKey));
+        everythingNative.Everything_QueryW(true);
 
-        int resultNum = everythingInstance.Everything_GetNumResults();
+        Buffer buffer = CharBuffer.allocate(BUFFER_LEN);
+
+        int resultNum = everythingNative.Everything_GetNumResults();
         for (int i = 0; i < resultNum; i++) {
-            WString wString = everythingInstance.Everything_GetResultPathA(i);
-            searchResult.add(String.valueOf(wString));
-            everythingInstance.Everything_GetResultFullPathNameW(i, p, 260);
-            System.out.println();
-//            byte[] bufferBuf = ((ByteBuffer) p).array();
-
-//            String tmp = new String (bufferBuf);
-//            System.out.println("==> "+tmp);
-//            if(tmp.contains("_abc")){
-//                System.out.println("");
-//            }
-//            if (bufferBuf.length > 0) {
-//                searchResult.add(new String(bufferBuf));
-//            }
+            everythingNative.Everything_GetResultFullPathNameW(i, buffer, BUFFER_LEN);
+            char[] bf = (char[]) buffer.array();
+            // cut off when zero byte  appear
+            for (int j = 0; j < bf.length - 1; j++) {
+                if (bf[j] == 0x00) {
+                    char[] dstArray = new char[j];
+                    System.arraycopy(bf, 0, dstArray, 0, j);
+                    String btString = new String(dstArray).trim().replaceAll("\u0000", "");
+                    // debug
+                    if (btString.contains("google_driver\\document_raw\\")) {
+                        System.out.println();
+                    }
+                    searchResult.add(btString);
+                    break;
+                }
+            }
         }
         return searchResult;
+    }
+
+
+    private static class EverythingException extends Exception {
+        public EverythingException() {
+        }
+
+        public EverythingException(String message) {
+            super(message);
+        }
+
+        public EverythingException(String message, Throwable cause) {
+            super(message, cause);
+        }
+
+        public EverythingException(Throwable cause) {
+            super(cause);
+        }
+
+        public EverythingException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
+            super(message, cause, enableSuppression, writableStackTrace);
+        }
     }
 
 }
