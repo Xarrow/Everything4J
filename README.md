@@ -1,5 +1,7 @@
 # Everything4J
 
+[![Build Status](https://travis-ci.org/Xarrow/Everything4J.svg?branch=master)](https://travis-ci.org/Xarrow/Everything4J)
+
 ----
 
 Everything4J is a implementation of everything which is base on `Everything.dll`, and powered by [JNA ( Java Native Access )](https://github.com/java-native-access/jna).
