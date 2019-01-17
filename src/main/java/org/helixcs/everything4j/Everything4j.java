@@ -83,12 +83,7 @@ public final class Everything4j {
                 if (bf[j] == 0x00) {
                     char[] dstArray = new char[j];
                     System.arraycopy(bf, 0, dstArray, 0, j);
-                    String btString = new String(dstArray).trim().replaceAll("\u0000", "");
-                    // debug
-                    if (btString.contains("google_driver\\document_raw\\")) {
-                        System.out.println();
-                    }
-                    searchResult.add(btString);
+                    searchResult.add(new String(dstArray).trim().replaceAll("\u0000", ""));
                     break;
                 }
             }
