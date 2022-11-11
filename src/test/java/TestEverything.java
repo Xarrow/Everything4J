@@ -4,11 +4,11 @@ import org.junit.Test;
 import java.util.List;
 
 public class TestEverything {
-    private static Everything4j everything4jInstance = Everything4j.getInstance();
+    private static final Everything4j everything4jInstance = Everything4j.getInstance();
 
     @Test
     public void testSearchE() {
-        List<String> sl = everything4jInstance.searchResult("google");
+        List<String> sl = everything4jInstance.searchResult(".mp4");
         System.out.println(sl.size());
         for (int i = 0; i < sl.size(); i++) {
             System.out.println(i + " ==> " + sl.get(i));

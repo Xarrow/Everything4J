@@ -20,7 +20,7 @@ public class EverythingUtils {
      */
     public static boolean isWinArch() {
         String osArch = System.getProperty("os.name").toLowerCase();
-        return osArch.length() >= 1 && osArch.contains("windows");
+        return osArch.contains("windows");
     }
 
     /**

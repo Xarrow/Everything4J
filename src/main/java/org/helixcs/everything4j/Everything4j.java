@@ -40,7 +40,7 @@ public final class Everything4j {
     }
 
     private static class InnerHolder {
-        private static Everything4j everything4jInstance = new Everything4j();
+        private static final Everything4j everything4jInstance = new Everything4j();
     }
 
     public List<String> searchPathList(String searchKey) {
